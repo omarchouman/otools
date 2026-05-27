@@ -28,7 +28,7 @@ export default async function DashboardLayout({
       <Sidebar user={userData} />
       <div className="flex flex-1 flex-col overflow-hidden">
         <TopNav user={userData} />
-        <main className="flex-1 overflow-y-auto p-6">{children}</main>
+        <main className="flex-1 overflow-y-auto">{children}</main>
       </div>
     </div>
   )
