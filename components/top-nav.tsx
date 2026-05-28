@@ -28,6 +28,7 @@ const pageTitles: Record<string, { title: string; subtitle: string }> = {
   '/color-converter': { title: 'Color Converter', subtitle: 'Convert between HEX, RGB, HSL, and HSB' },
   '/headline-analyzer': { title: 'Headline Analyzer', subtitle: 'Score and improve your headlines' },
   '/utm-builder': { title: 'UTM Builder', subtitle: 'Build and copy UTM-tagged campaign URLs' },
+  '/meta-tag-builder': { title: 'Meta Tag Builder', subtitle: 'Generate SEO and social meta tags' },
   '/settings': { title: 'Settings', subtitle: 'Manage your account' },
 }
 

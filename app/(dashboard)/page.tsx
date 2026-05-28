@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { KeyRound, Megaphone, BarChart2, Sparkles, ArrowUpRight, ShieldCheck, Regex, Hash, GitCompareArrows, Palette, TrendingUp, Link2 } from 'lucide-react'
+import { KeyRound, Megaphone, BarChart2, Sparkles, ArrowUpRight, ShieldCheck, Regex, Hash, GitCompareArrows, Palette, TrendingUp, Link2, Tags } from 'lucide-react'
 
 const tools = [
   {
@@ -112,6 +112,16 @@ const tools = [
     glow: 'shadow-teal-500/20',
     tag: 'Marketing',
   },
+  {
+    href: '/meta-tag-builder',
+    icon: Tags,
+    title: 'Meta Tag Builder',
+    description:
+      'Generate SEO-ready title, description, Open Graph, and Twitter Card tags with live previews.',
+    gradient: 'from-green-500 to-teal-600',
+    glow: 'shadow-green-500/20',
+    tag: 'Marketing',
+  },
 ]
 
 export default function HomePage() {
@@ -130,7 +140,7 @@ export default function HomePage() {
         </div>
         <div className="flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1.5 shadow-sm">
           <span className="h-1.5 w-1.5 rounded-full bg-primary" />
-          <span className="text-xs font-medium text-muted-foreground">11 tools available</span>
+          <span className="text-xs font-medium text-muted-foreground">12 tools available</span>
         </div>
       </div>
 

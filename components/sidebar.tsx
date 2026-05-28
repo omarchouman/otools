@@ -22,6 +22,7 @@ import {
   GitCompareArrows,
   Palette,
   Link2,
+  Tags,
 } from 'lucide-react'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
@@ -79,6 +80,7 @@ const navCategories: NavCategory[] = [
       { href: '/marketing', label: 'Marketing', icon: Megaphone },
       { href: '/headline-analyzer', label: 'Headline Analyzer', icon: TrendingUp },
       { href: '/utm-builder', label: 'UTM Builder', icon: Link2 },
+      { href: '/meta-tag-builder', label: 'Meta Tag Builder', icon: Tags },
     ],
   },
   {
