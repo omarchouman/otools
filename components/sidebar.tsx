@@ -45,7 +45,7 @@ export function Sidebar({ user }: { user: SidebarUser }) {
     <TooltipProvider delay={0}>
       <aside
         className={cn(
-          'relative flex h-screen shrink-0 flex-col bg-sidebar transition-[width] duration-200',
+          'relative flex h-screen shrink-0 flex-col border-r border-sidebar-border bg-sidebar transition-[width] duration-200',
           collapsed ? 'w-[68px]' : 'w-60'
         )}
       >
@@ -60,11 +60,13 @@ export function Sidebar({ user }: { user: SidebarUser }) {
             <Zap className="h-4 w-4 text-primary-foreground" />
           </div>
           {!collapsed && (
-            <span className="text-[15px] font-bold tracking-tight text-white">OTools</span>
+            <span className="text-[15px] font-bold tracking-tight text-sidebar-foreground">
+              OTools
+            </span>
           )}
         </div>
 
-        <div className="mx-4 h-px bg-white/10" />
+        <div className="mx-4 h-px bg-sidebar-border" />
 
         {/* Nav */}
         <nav className="flex flex-1 flex-col gap-0.5 p-3 pt-4">
@@ -78,15 +80,17 @@ export function Sidebar({ user }: { user: SidebarUser }) {
                 className={cn(
                   'group flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-all duration-150',
                   isActive
-                    ? 'bg-white/15 text-white'
-                    : 'text-white/50 hover:bg-white/8 hover:text-white/85',
+                    ? 'bg-primary/10 text-primary'
+                    : 'text-sidebar-foreground/55 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground',
                   collapsed && 'justify-center px-0'
                 )}
               >
                 <Icon
                   className={cn(
                     'h-[18px] w-[18px] shrink-0 transition-colors',
-                    isActive ? 'text-white' : 'text-white/50 group-hover:text-white/85'
+                    isActive
+                      ? 'text-primary'
+                      : 'text-sidebar-foreground/45 group-hover:text-sidebar-accent-foreground'
                   )}
                 />
                 {!collapsed && <span className="flex-1 leading-none">{label}</span>}
@@ -107,7 +111,7 @@ export function Sidebar({ user }: { user: SidebarUser }) {
           })}
         </nav>
 
-        <div className="mx-4 h-px bg-white/10" />
+        <div className="mx-4 h-px bg-sidebar-border" />
 
         {/* User */}
         <div className={cn('p-3', collapsed && 'flex justify-center')}>
@@ -116,9 +120,9 @@ export function Sidebar({ user }: { user: SidebarUser }) {
               <TooltipTrigger
                 render={
                   <Link href="/settings">
-                    <Avatar className="h-8 w-8 cursor-pointer ring-1 ring-white/20 transition-all hover:ring-white/40">
+                    <Avatar className="h-8 w-8 cursor-pointer ring-1 ring-sidebar-border transition-all hover:ring-sidebar-accent">
                       <AvatarImage src={user.avatarUrl} />
-                      <AvatarFallback className="bg-white/10 text-[10px] text-white">
+                      <AvatarFallback className="bg-sidebar-accent text-[10px] text-sidebar-foreground">
                         {initials}
                       </AvatarFallback>
                     </Avatar>
@@ -130,20 +134,20 @@ export function Sidebar({ user }: { user: SidebarUser }) {
           ) : (
             <Link
               href="/settings"
-              className="flex items-center gap-3 rounded-xl px-3 py-2.5 transition-colors hover:bg-white/8"
+              className="flex items-center gap-3 rounded-xl px-3 py-2.5 transition-colors hover:bg-sidebar-accent"
             >
-              <Avatar className="h-7 w-7 shrink-0 ring-1 ring-white/20">
+              <Avatar className="h-7 w-7 shrink-0 ring-1 ring-sidebar-border">
                 <AvatarImage src={user.avatarUrl} />
-                <AvatarFallback className="bg-white/10 text-[10px] text-white">
+                <AvatarFallback className="bg-sidebar-accent text-[10px] text-sidebar-foreground">
                   {initials}
                 </AvatarFallback>
               </Avatar>
               <div className="flex min-w-0 flex-col">
-                <span className="truncate text-xs font-medium leading-none text-white/90">
+                <span className="truncate text-xs font-medium leading-none text-sidebar-foreground/90">
                   {user.displayName ?? user.email ?? 'Account'}
                 </span>
                 {user.displayName && user.email && (
-                  <span className="mt-0.5 truncate text-[10px] leading-none text-white/40">
+                  <span className="mt-0.5 truncate text-[10px] leading-none text-sidebar-foreground/45">
                     {user.email}
                   </span>
                 )}
@@ -157,7 +161,7 @@ export function Sidebar({ user }: { user: SidebarUser }) {
           variant="ghost"
           size="icon"
           onClick={() => setCollapsed(!collapsed)}
-          className="absolute -right-3 top-[72px] h-6 w-6 rounded-full border border-white/15 bg-sidebar text-white/50 shadow-md hover:bg-sidebar hover:text-white"
+          className="absolute -right-3 top-[72px] h-6 w-6 rounded-full border border-sidebar-border bg-sidebar text-sidebar-foreground/50 shadow-sm hover:bg-sidebar hover:text-sidebar-foreground"
           aria-label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
         >
           <ChevronLeft
