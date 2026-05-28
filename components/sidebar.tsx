@@ -196,7 +196,7 @@ export function Sidebar({ user }: { user: SidebarUser }) {
             </div>
           ) : (
             /* Expanded: home link + categorized accordion */
-            <div className="flex flex-col">
+            <div className="flex flex-col gap-4">
               {/* Home */}
               <NavLink item={homeItem} />
 
@@ -205,7 +205,7 @@ export function Sidebar({ user }: { user: SidebarUser }) {
                 const isOpen = openCategories.has(cat.id)
                 const CatIcon = cat.icon
                 return (
-                  <div key={cat.id} className={i === 0 ? 'mt-2' : 'mt-5'}>
+                  <div key={cat.id}>
                     {/* Category header */}
                     <button
                       onClick={() => toggleCategory(cat.id)}
