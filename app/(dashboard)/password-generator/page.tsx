@@ -91,7 +91,10 @@ const CHAR_TOGGLES = [
 // ── Page ────────────────────────────────────────────────────────────────────
 export default function PasswordGeneratorPage() {
   const [opts, setOpts] = useState<Options>(DEFAULT_OPTS)
-  const [passwords, setPasswords] = useState<string[]>([])
+  const [passwords, setPasswords] = useState<string[]>(() => {
+    const charset = buildCharset(DEFAULT_OPTS)
+    return [generatePassword(charset, DEFAULT_OPTS.length)]
+  })
   const [copiedIdx, setCopiedIdx] = useState<number | null>(null)
 
   const charset = buildCharset(opts)
@@ -238,20 +241,7 @@ export default function PasswordGeneratorPage() {
 
       {/* ── Right: Output ──────────────────────────────────────────────── */}
       <div className="flex min-h-0 flex-1 flex-col">
-        {passwords.length === 0 ? (
-
-          /* Empty state */
-          <div className="flex flex-1 items-center justify-center rounded-2xl border border-dashed border-border">
-            <div className="text-center">
-              <RefreshCw className="mx-auto mb-3 h-8 w-8 text-muted-foreground/30" />
-              <p className="text-sm font-medium text-muted-foreground">No passwords yet</p>
-              <p className="mt-1 text-xs text-muted-foreground/60">
-                Configure your options and click Generate
-              </p>
-            </div>
-          </div>
-
-        ) : opts.count === 1 ? (
+        {opts.count === 1 ? (
 
           /* Single password */
           <Card className="flex-1">
