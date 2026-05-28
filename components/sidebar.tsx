@@ -116,7 +116,7 @@ export function Sidebar({ user }: { user: SidebarUser }) {
         href={item.href}
         aria-current={isActive ? 'page' : undefined}
         className={cn(
-          'group flex items-center gap-2.5 rounded-lg px-2.5 py-2 text-sm font-medium transition-all duration-150',
+          'group flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-all duration-150',
           isActive
             ? 'bg-primary/10 text-primary'
             : 'text-sidebar-foreground/55 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground'
@@ -141,7 +141,7 @@ export function Sidebar({ user }: { user: SidebarUser }) {
       <aside
         className={cn(
           'relative flex h-screen shrink-0 flex-col border-r border-sidebar-border bg-sidebar transition-[width] duration-200',
-          collapsed ? 'w-[68px]' : 'w-64'
+          collapsed ? 'w-[68px]' : 'w-72'
         )}
       >
         {/* Logo */}
@@ -164,7 +164,7 @@ export function Sidebar({ user }: { user: SidebarUser }) {
         <div className="mx-4 h-px bg-sidebar-border" />
 
         {/* Nav */}
-        <nav className="flex flex-1 flex-col overflow-y-auto p-3 pt-3">
+        <nav className="flex flex-1 flex-col overflow-y-auto p-4 pt-4">
           {collapsed ? (
             /* Collapsed: flat icon list with tooltips */
             <div className="flex flex-col items-center gap-0.5">
@@ -196,11 +196,11 @@ export function Sidebar({ user }: { user: SidebarUser }) {
             </div>
           ) : (
             /* Expanded: home link + categorized accordion */
-            <div className="flex flex-col gap-1">
+            <div className="flex flex-col gap-5">
               {/* Home */}
               <NavLink item={homeItem} />
 
-              <div className="mt-1" />
+              <div className="mt-3" />
 
               {/* Categories */}
               {navCategories.map((cat) => {
@@ -211,7 +211,7 @@ export function Sidebar({ user }: { user: SidebarUser }) {
                     {/* Category header */}
                     <button
                       onClick={() => toggleCategory(cat.id)}
-                      className="flex w-full items-center gap-2 rounded-lg px-2.5 py-1.5 text-[11px] font-semibold uppercase tracking-wider text-sidebar-foreground/40 transition-colors hover:text-sidebar-foreground/65"
+                      className="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-[11px] font-semibold uppercase tracking-wider text-sidebar-foreground/40 transition-colors hover:text-sidebar-foreground/65"
                     >
                       <CatIcon className="h-3.5 w-3.5 shrink-0" />
                       <span className="flex-1 text-left">{cat.label}</span>
