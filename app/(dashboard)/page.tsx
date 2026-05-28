@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { KeyRound, Megaphone, BarChart2, Sparkles, ArrowUpRight, ShieldCheck, Regex, Hash, GitCompareArrows } from 'lucide-react'
+import { KeyRound, Megaphone, BarChart2, Sparkles, ArrowUpRight, ShieldCheck, Regex, Hash, GitCompareArrows, Palette } from 'lucide-react'
 
 const tools = [
   {
@@ -82,6 +82,16 @@ const tools = [
     glow: 'shadow-teal-600/20',
     tag: 'Developer',
   },
+  {
+    href: '/color-converter',
+    icon: Palette,
+    title: 'Color Converter',
+    description:
+      'Convert between HEX, RGB, HSL, and HSB instantly, with a live swatch, color picker, and WCAG contrast scores.',
+    gradient: 'from-green-500 to-emerald-400',
+    glow: 'shadow-green-500/20',
+    tag: 'Design',
+  },
 ]
 
 export default function HomePage() {
@@ -100,7 +110,7 @@ export default function HomePage() {
         </div>
         <div className="flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1.5 shadow-sm">
           <span className="h-1.5 w-1.5 rounded-full bg-primary" />
-          <span className="text-xs font-medium text-muted-foreground">8 tools available</span>
+          <span className="text-xs font-medium text-muted-foreground">9 tools available</span>
         </div>
       </div>
 

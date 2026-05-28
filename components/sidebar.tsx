@@ -20,6 +20,7 @@ import {
   Regex,
   Hash,
   GitCompareArrows,
+  Palette,
 } from 'lucide-react'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
@@ -59,6 +60,14 @@ const navCategories: NavCategory[] = [
       { href: '/regex-tester', label: 'Regex Tester', icon: Regex },
       { href: '/hash-generator', label: 'Hash Generator', icon: Hash },
       { href: '/diff-viewer', label: 'Diff Viewer', icon: GitCompareArrows },
+    ],
+  },
+  {
+    id: 'design',
+    label: 'Design Tools',
+    icon: Palette,
+    items: [
+      { href: '/color-converter', label: 'Color Converter', icon: Palette },
     ],
   },
   {

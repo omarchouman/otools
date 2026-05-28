@@ -25,6 +25,7 @@ const pageTitles: Record<string, { title: string; subtitle: string }> = {
   '/regex-tester': { title: 'Regex Tester', subtitle: 'Test patterns and inspect matches' },
   '/hash-generator': { title: 'Hash Generator', subtitle: 'MD5, SHA-1, SHA-256, SHA-384, SHA-512' },
   '/diff-viewer': { title: 'Diff Viewer', subtitle: 'Compare two texts line by line' },
+  '/color-converter': { title: 'Color Converter', subtitle: 'Convert between HEX, RGB, HSL, and HSB' },
   '/settings': { title: 'Settings', subtitle: 'Manage your account' },
 }
 
