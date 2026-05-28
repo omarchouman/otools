@@ -21,6 +21,7 @@ const pageTitles: Record<string, { title: string; subtitle: string }> = {
   '/marketing': { title: 'Marketing', subtitle: 'Content and campaign tools' },
   '/analysis': { title: 'Analysis', subtitle: 'Data and insights' },
   '/ai-tools': { title: 'AI Tools', subtitle: 'AI-powered utilities' },
+  '/jwt-decoder': { title: 'JWT Decoder', subtitle: 'Inspect token claims and structure' },
   '/settings': { title: 'Settings', subtitle: 'Manage your account' },
 }
 

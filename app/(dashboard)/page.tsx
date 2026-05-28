@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { KeyRound, Megaphone, BarChart2, Sparkles, ArrowUpRight } from 'lucide-react'
+import { KeyRound, Megaphone, BarChart2, Sparkles, ArrowUpRight, ShieldCheck } from 'lucide-react'
 
 const tools = [
   {
@@ -41,6 +41,16 @@ const tools = [
     gradient: 'from-emerald-400 to-green-500',
     glow: 'shadow-emerald-400/20',
     tag: 'AI',
+  },
+  {
+    href: '/jwt-decoder',
+    icon: ShieldCheck,
+    title: 'JWT Decoder',
+    description:
+      'Paste any JWT and instantly inspect its header, payload claims, and expiry status.',
+    gradient: 'from-green-600 to-teal-700',
+    glow: 'shadow-green-600/20',
+    tag: 'Developer',
   },
 ]
 

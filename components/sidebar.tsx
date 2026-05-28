@@ -16,6 +16,7 @@ import {
   TrendingUp,
   Bot,
   Layers,
+  ShieldCheck,
 } from 'lucide-react'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
@@ -51,6 +52,7 @@ const navCategories: NavCategory[] = [
     icon: Code2,
     items: [
       { href: '/password-generator', label: 'Password Generator', icon: KeyRound },
+      { href: '/jwt-decoder', label: 'JWT Decoder', icon: ShieldCheck },
     ],
   },
   {
