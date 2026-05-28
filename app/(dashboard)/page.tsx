@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { KeyRound, Megaphone, BarChart2, Sparkles, ArrowUpRight, ShieldCheck, Regex, Hash } from 'lucide-react'
+import { KeyRound, Megaphone, BarChart2, Sparkles, ArrowUpRight, ShieldCheck, Regex, Hash, GitCompareArrows } from 'lucide-react'
 
 const tools = [
   {
@@ -72,6 +72,16 @@ const tools = [
     glow: 'shadow-emerald-600/20',
     tag: 'Developer',
   },
+  {
+    href: '/diff-viewer',
+    icon: GitCompareArrows,
+    title: 'Diff Viewer',
+    description:
+      'Paste two blocks of text and instantly see every addition, deletion, and unchanged line side by side.',
+    gradient: 'from-teal-600 to-emerald-500',
+    glow: 'shadow-teal-600/20',
+    tag: 'Developer',
+  },
 ]
 
 export default function HomePage() {
@@ -90,7 +100,7 @@ export default function HomePage() {
         </div>
         <div className="flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1.5 shadow-sm">
           <span className="h-1.5 w-1.5 rounded-full bg-primary" />
-          <span className="text-xs font-medium text-muted-foreground">7 tools available</span>
+          <span className="text-xs font-medium text-muted-foreground">8 tools available</span>
         </div>
       </div>
 
