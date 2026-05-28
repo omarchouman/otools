@@ -10,7 +10,12 @@ import {
   BarChart2,
   Sparkles,
   ChevronLeft,
+  ChevronDown,
   Zap,
+  Code2,
+  TrendingUp,
+  Bot,
+  Layers,
 } from 'lucide-react'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
@@ -22,13 +27,59 @@ import {
 } from '@/components/ui/tooltip'
 import { cn } from '@/lib/utils'
 
-const navItems = [
-  { href: '/', label: 'Home', icon: LayoutDashboard },
-  { href: '/password-generator', label: 'Password Generator', icon: KeyRound },
-  { href: '/marketing', label: 'Marketing', icon: Megaphone },
-  { href: '/analysis', label: 'Analysis', icon: BarChart2 },
-  { href: '/ai-tools', label: 'AI Tools', icon: Sparkles },
+type LucideIcon = React.ComponentType<{ className?: string }>
+
+interface NavItem {
+  href: string
+  label: string
+  icon: LucideIcon
+}
+
+interface NavCategory {
+  id: string
+  label: string
+  icon: LucideIcon
+  items: NavItem[]
+}
+
+const homeItem: NavItem = { href: '/', label: 'Home', icon: LayoutDashboard }
+
+const navCategories: NavCategory[] = [
+  {
+    id: 'developer',
+    label: 'Developer Tools',
+    icon: Code2,
+    items: [
+      { href: '/password-generator', label: 'Password Generator', icon: KeyRound },
+    ],
+  },
+  {
+    id: 'marketing',
+    label: 'Marketing Tools',
+    icon: TrendingUp,
+    items: [
+      { href: '/marketing', label: 'Marketing', icon: Megaphone },
+    ],
+  },
+  {
+    id: 'ai',
+    label: 'AI Tools',
+    icon: Bot,
+    items: [
+      { href: '/ai-tools', label: 'AI Tools', icon: Sparkles },
+    ],
+  },
+  {
+    id: 'general',
+    label: 'General Tools',
+    icon: Layers,
+    items: [
+      { href: '/analysis', label: 'Analysis', icon: BarChart2 },
+    ],
+  },
 ]
+
+const allItems: NavItem[] = [homeItem, ...navCategories.flatMap((c) => c.items)]
 
 interface SidebarUser {
   email?: string
@@ -41,12 +92,56 @@ export function Sidebar({ user }: { user: SidebarUser }) {
   const [collapsed, setCollapsed] = useState(false)
   const initials = (user.displayName ?? user.email ?? 'U').slice(0, 2).toUpperCase()
 
+  const activeCategoryId = navCategories.find((cat) =>
+    cat.items.some((item) => item.href === pathname)
+  )?.id
+
+  const [openCategories, setOpenCategories] = useState<Set<string>>(
+    () => new Set(navCategories.map((c) => c.id))
+  )
+
+  const toggleCategory = (id: string) => {
+    setOpenCategories((prev) => {
+      const next = new Set(prev)
+      next.has(id) ? next.delete(id) : next.add(id)
+      return next
+    })
+  }
+
+  const NavLink = ({ item }: { item: NavItem }) => {
+    const isActive = pathname === item.href
+    const Icon = item.icon
+    return (
+      <Link
+        href={item.href}
+        aria-current={isActive ? 'page' : undefined}
+        className={cn(
+          'group flex items-center gap-2.5 rounded-lg px-2.5 py-2 text-sm font-medium transition-all duration-150',
+          isActive
+            ? 'bg-primary/10 text-primary'
+            : 'text-sidebar-foreground/55 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground'
+        )}
+      >
+        <Icon
+          className={cn(
+            'h-4 w-4 shrink-0 transition-colors',
+            isActive
+              ? 'text-primary'
+              : 'text-sidebar-foreground/40 group-hover:text-sidebar-accent-foreground'
+          )}
+        />
+        <span className="flex-1 leading-none">{item.label}</span>
+        {isActive && <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />}
+      </Link>
+    )
+  }
+
   return (
     <TooltipProvider delay={0}>
       <aside
         className={cn(
           'relative flex h-screen shrink-0 flex-col border-r border-sidebar-border bg-sidebar transition-[width] duration-200',
-          collapsed ? 'w-[68px]' : 'w-60'
+          collapsed ? 'w-[68px]' : 'w-64'
         )}
       >
         {/* Logo */}
@@ -69,46 +164,85 @@ export function Sidebar({ user }: { user: SidebarUser }) {
         <div className="mx-4 h-px bg-sidebar-border" />
 
         {/* Nav */}
-        <nav className="flex flex-1 flex-col gap-0.5 p-3 pt-4">
-          {navItems.map(({ href, label, icon: Icon }) => {
-            const isActive = pathname === href
-            const linkEl = (
-              <Link
-                key={href}
-                href={href}
-                aria-current={isActive ? 'page' : undefined}
-                className={cn(
-                  'group flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-all duration-150',
-                  isActive
-                    ? 'bg-primary/10 text-primary'
-                    : 'text-sidebar-foreground/55 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground',
-                  collapsed && 'justify-center px-0'
-                )}
-              >
-                <Icon
-                  className={cn(
-                    'h-[18px] w-[18px] shrink-0 transition-colors',
-                    isActive
-                      ? 'text-primary'
-                      : 'text-sidebar-foreground/45 group-hover:text-sidebar-accent-foreground'
-                  )}
-                />
-                {!collapsed && <span className="flex-1 leading-none">{label}</span>}
-                {isActive && !collapsed && (
-                  <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
-                )}
-              </Link>
-            )
+        <nav className="flex flex-1 flex-col overflow-y-auto p-3 pt-3">
+          {collapsed ? (
+            /* Collapsed: flat icon list with tooltips */
+            <div className="flex flex-col items-center gap-0.5">
+              {allItems.map((item) => {
+                const isActive = pathname === item.href
+                const Icon = item.icon
+                return (
+                  <Tooltip key={item.href}>
+                    <TooltipTrigger
+                      render={
+                        <Link
+                          href={item.href}
+                          aria-current={isActive ? 'page' : undefined}
+                          className={cn(
+                            'flex h-9 w-9 items-center justify-center rounded-lg transition-all',
+                            isActive
+                              ? 'bg-primary/10 text-primary'
+                              : 'text-sidebar-foreground/45 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground'
+                          )}
+                        >
+                          <Icon className="h-4 w-4 shrink-0" />
+                        </Link>
+                      }
+                    />
+                    <TooltipContent side="right">{item.label}</TooltipContent>
+                  </Tooltip>
+                )
+              })}
+            </div>
+          ) : (
+            /* Expanded: home link + categorized accordion */
+            <div className="flex flex-col gap-1">
+              {/* Home */}
+              <NavLink item={homeItem} />
 
-            return collapsed ? (
-              <Tooltip key={href}>
-                <TooltipTrigger render={linkEl} />
-                <TooltipContent side="right">{label}</TooltipContent>
-              </Tooltip>
-            ) : (
-              linkEl
-            )
-          })}
+              <div className="mt-1" />
+
+              {/* Categories */}
+              {navCategories.map((cat) => {
+                const isOpen = openCategories.has(cat.id)
+                const CatIcon = cat.icon
+                return (
+                  <div key={cat.id}>
+                    {/* Category header */}
+                    <button
+                      onClick={() => toggleCategory(cat.id)}
+                      className="flex w-full items-center gap-2 rounded-lg px-2.5 py-1.5 text-[11px] font-semibold uppercase tracking-wider text-sidebar-foreground/40 transition-colors hover:text-sidebar-foreground/65"
+                    >
+                      <CatIcon className="h-3.5 w-3.5 shrink-0" />
+                      <span className="flex-1 text-left">{cat.label}</span>
+                      <ChevronDown
+                        className={cn(
+                          'h-3 w-3 shrink-0 transition-transform duration-200',
+                          isOpen && 'rotate-180'
+                        )}
+                      />
+                    </button>
+
+                    {/* Category items — animated with CSS grid */}
+                    <div
+                      className={cn(
+                        'grid transition-all duration-200',
+                        isOpen ? '[grid-template-rows:1fr]' : '[grid-template-rows:0fr]'
+                      )}
+                    >
+                      <div className="overflow-hidden">
+                        <div className="ml-3 space-y-0.5 border-l border-sidebar-border py-1 pl-2">
+                          {cat.items.map((item) => (
+                            <NavLink key={item.href} item={item} />
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )
+              })}
+            </div>
+          )}
         </nav>
 
         <div className="mx-4 h-px bg-sidebar-border" />
