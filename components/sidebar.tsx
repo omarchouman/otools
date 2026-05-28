@@ -17,6 +17,7 @@ import {
   Bot,
   Layers,
   ShieldCheck,
+  Regex,
 } from 'lucide-react'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
@@ -53,6 +54,7 @@ const navCategories: NavCategory[] = [
     items: [
       { href: '/password-generator', label: 'Password Generator', icon: KeyRound },
       { href: '/jwt-decoder', label: 'JWT Decoder', icon: ShieldCheck },
+      { href: '/regex-tester', label: 'Regex Tester', icon: Regex },
     ],
   },
   {

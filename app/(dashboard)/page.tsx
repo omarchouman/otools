@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { KeyRound, Megaphone, BarChart2, Sparkles, ArrowUpRight, ShieldCheck } from 'lucide-react'
+import { KeyRound, Megaphone, BarChart2, Sparkles, ArrowUpRight, ShieldCheck, Regex } from 'lucide-react'
 
 const tools = [
   {
@@ -52,6 +52,16 @@ const tools = [
     glow: 'shadow-green-600/20',
     tag: 'Developer',
   },
+  {
+    href: '/regex-tester',
+    icon: Regex,
+    title: 'Regex Tester',
+    description:
+      'Write and test regular expressions live, with match highlighting, capture groups, and flag toggles.',
+    gradient: 'from-teal-500 to-green-600',
+    glow: 'shadow-teal-500/20',
+    tag: 'Developer',
+  },
 ]
 
 export default function HomePage() {
@@ -70,7 +80,7 @@ export default function HomePage() {
         </div>
         <div className="flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1.5 shadow-sm">
           <span className="h-1.5 w-1.5 rounded-full bg-primary" />
-          <span className="text-xs font-medium text-muted-foreground">4 tools available</span>
+          <span className="text-xs font-medium text-muted-foreground">6 tools available</span>
         </div>
       </div>
 
