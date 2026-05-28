@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { KeyRound, Megaphone, BarChart2, Sparkles, ArrowUpRight, ShieldCheck, Regex } from 'lucide-react'
+import { KeyRound, Megaphone, BarChart2, Sparkles, ArrowUpRight, ShieldCheck, Regex, Hash } from 'lucide-react'
 
 const tools = [
   {
@@ -62,6 +62,16 @@ const tools = [
     glow: 'shadow-teal-500/20',
     tag: 'Developer',
   },
+  {
+    href: '/hash-generator',
+    icon: Hash,
+    title: 'Hash Generator',
+    description:
+      'Instantly compute MD5, SHA-1, SHA-256, SHA-384, and SHA-512 hashes with hex or Base64 output.',
+    gradient: 'from-emerald-600 to-teal-600',
+    glow: 'shadow-emerald-600/20',
+    tag: 'Developer',
+  },
 ]
 
 export default function HomePage() {
@@ -80,7 +90,7 @@ export default function HomePage() {
         </div>
         <div className="flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1.5 shadow-sm">
           <span className="h-1.5 w-1.5 rounded-full bg-primary" />
-          <span className="text-xs font-medium text-muted-foreground">6 tools available</span>
+          <span className="text-xs font-medium text-muted-foreground">7 tools available</span>
         </div>
       </div>
 

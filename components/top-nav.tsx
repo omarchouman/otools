@@ -23,6 +23,7 @@ const pageTitles: Record<string, { title: string; subtitle: string }> = {
   '/ai-tools': { title: 'AI Tools', subtitle: 'AI-powered utilities' },
   '/jwt-decoder': { title: 'JWT Decoder', subtitle: 'Inspect token claims and structure' },
   '/regex-tester': { title: 'Regex Tester', subtitle: 'Test patterns and inspect matches' },
+  '/hash-generator': { title: 'Hash Generator', subtitle: 'MD5, SHA-1, SHA-256, SHA-384, SHA-512' },
   '/settings': { title: 'Settings', subtitle: 'Manage your account' },
 }
 
