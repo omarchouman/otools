@@ -10,6 +10,7 @@ import {
   BarChart2,
   Sparkles,
   ChevronLeft,
+  Zap,
 } from 'lucide-react'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
@@ -38,35 +39,35 @@ interface SidebarUser {
 export function Sidebar({ user }: { user: SidebarUser }) {
   const pathname = usePathname()
   const [collapsed, setCollapsed] = useState(false)
-
-  const initials = (user.displayName ?? user.email ?? 'U')
-    .slice(0, 2)
-    .toUpperCase()
+  const initials = (user.displayName ?? user.email ?? 'U').slice(0, 2).toUpperCase()
 
   return (
     <TooltipProvider delay={0}>
       <aside
         className={cn(
-          'relative flex h-screen flex-col border-r bg-card transition-[width] duration-200',
-          collapsed ? 'w-16' : 'w-60'
+          'relative flex h-screen shrink-0 flex-col bg-sidebar transition-[width] duration-200',
+          collapsed ? 'w-[68px]' : 'w-60'
         )}
       >
         {/* Logo */}
         <div
           className={cn(
-            'flex h-14 items-center border-b px-4',
+            'flex h-16 shrink-0 items-center gap-3 px-5',
             collapsed && 'justify-center px-0'
           )}
         >
-          {collapsed ? (
-            <span className="text-lg font-bold">O</span>
-          ) : (
-            <span className="text-lg font-bold tracking-tight">OTools</span>
+          <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-primary shadow-sm shadow-primary/30">
+            <Zap className="h-4 w-4 text-primary-foreground" />
+          </div>
+          {!collapsed && (
+            <span className="text-[15px] font-bold tracking-tight text-white">OTools</span>
           )}
         </div>
 
-        {/* Nav items */}
-        <nav className="flex flex-1 flex-col gap-1 p-2">
+        <div className="mx-4 h-px bg-white/10" />
+
+        {/* Nav */}
+        <nav className="flex flex-1 flex-col gap-0.5 p-3 pt-4">
           {navItems.map(({ href, label, icon: Icon }) => {
             const isActive = pathname === href
             const linkEl = (
@@ -75,16 +76,23 @@ export function Sidebar({ user }: { user: SidebarUser }) {
                 href={href}
                 aria-current={isActive ? 'page' : undefined}
                 className={cn(
-                  'flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium transition-colors',
-                  'hover:bg-accent hover:text-accent-foreground',
+                  'group flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-all duration-150',
                   isActive
-                    ? 'bg-primary/10 text-primary'
-                    : 'text-muted-foreground',
+                    ? 'bg-white/15 text-white'
+                    : 'text-white/50 hover:bg-white/8 hover:text-white/85',
                   collapsed && 'justify-center px-0'
                 )}
               >
-                <Icon className="h-4 w-4 shrink-0" />
-                {!collapsed && label}
+                <Icon
+                  className={cn(
+                    'h-[18px] w-[18px] shrink-0 transition-colors',
+                    isActive ? 'text-white' : 'text-white/50 group-hover:text-white/85'
+                  )}
+                />
+                {!collapsed && <span className="flex-1 leading-none">{label}</span>}
+                {isActive && !collapsed && (
+                  <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
+                )}
               </Link>
             )
 
@@ -99,16 +107,20 @@ export function Sidebar({ user }: { user: SidebarUser }) {
           })}
         </nav>
 
-        {/* User / Settings */}
-        <div className={cn('border-t p-2', collapsed && 'flex justify-center')}>
+        <div className="mx-4 h-px bg-white/10" />
+
+        {/* User */}
+        <div className={cn('p-3', collapsed && 'flex justify-center')}>
           {collapsed ? (
             <Tooltip>
               <TooltipTrigger
                 render={
                   <Link href="/settings">
-                    <Avatar className="h-8 w-8 cursor-pointer">
+                    <Avatar className="h-8 w-8 cursor-pointer ring-1 ring-white/20 transition-all hover:ring-white/40">
                       <AvatarImage src={user.avatarUrl} />
-                      <AvatarFallback className="text-xs">{initials}</AvatarFallback>
+                      <AvatarFallback className="bg-white/10 text-[10px] text-white">
+                        {initials}
+                      </AvatarFallback>
                     </Avatar>
                   </Link>
                 }
@@ -118,15 +130,24 @@ export function Sidebar({ user }: { user: SidebarUser }) {
           ) : (
             <Link
               href="/settings"
-              className="flex items-center gap-3 rounded-md px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
+              className="flex items-center gap-3 rounded-xl px-3 py-2.5 transition-colors hover:bg-white/8"
             >
-              <Avatar className="h-6 w-6">
+              <Avatar className="h-7 w-7 shrink-0 ring-1 ring-white/20">
                 <AvatarImage src={user.avatarUrl} />
-                <AvatarFallback className="text-xs">{initials}</AvatarFallback>
+                <AvatarFallback className="bg-white/10 text-[10px] text-white">
+                  {initials}
+                </AvatarFallback>
               </Avatar>
-              <span className="truncate">
-                {user.displayName ?? user.email ?? 'Account'}
-              </span>
+              <div className="flex min-w-0 flex-col">
+                <span className="truncate text-xs font-medium leading-none text-white/90">
+                  {user.displayName ?? user.email ?? 'Account'}
+                </span>
+                {user.displayName && user.email && (
+                  <span className="mt-0.5 truncate text-[10px] leading-none text-white/40">
+                    {user.email}
+                  </span>
+                )}
+              </div>
             </Link>
           )}
         </div>
@@ -136,7 +157,7 @@ export function Sidebar({ user }: { user: SidebarUser }) {
           variant="ghost"
           size="icon"
           onClick={() => setCollapsed(!collapsed)}
-          className="absolute -right-3 top-[58px] h-6 w-6 rounded-full border bg-background shadow-sm"
+          className="absolute -right-3 top-[72px] h-6 w-6 rounded-full border border-white/15 bg-sidebar text-white/50 shadow-md hover:bg-sidebar hover:text-white"
           aria-label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
         >
           <ChevronLeft
