@@ -196,18 +196,16 @@ export function Sidebar({ user }: { user: SidebarUser }) {
             </div>
           ) : (
             /* Expanded: home link + categorized accordion */
-            <div className="flex flex-col gap-5">
+            <div className="flex flex-col">
               {/* Home */}
               <NavLink item={homeItem} />
 
-              <div className="mt-3" />
-
               {/* Categories */}
-              {navCategories.map((cat) => {
+              {navCategories.map((cat, i) => {
                 const isOpen = openCategories.has(cat.id)
                 const CatIcon = cat.icon
                 return (
-                  <div key={cat.id}>
+                  <div key={cat.id} className={i === 0 ? 'mt-2' : 'mt-5'}>
                     {/* Category header */}
                     <button
                       onClick={() => toggleCategory(cat.id)}
