@@ -27,6 +27,7 @@ const pageTitles: Record<string, { title: string; subtitle: string }> = {
   '/diff-viewer': { title: 'Diff Viewer', subtitle: 'Compare two texts line by line' },
   '/color-converter': { title: 'Color Converter', subtitle: 'Convert between HEX, RGB, HSL, and HSB' },
   '/headline-analyzer': { title: 'Headline Analyzer', subtitle: 'Score and improve your headlines' },
+  '/utm-builder': { title: 'UTM Builder', subtitle: 'Build and copy UTM-tagged campaign URLs' },
   '/settings': { title: 'Settings', subtitle: 'Manage your account' },
 }
 

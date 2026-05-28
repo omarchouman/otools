@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { KeyRound, Megaphone, BarChart2, Sparkles, ArrowUpRight, ShieldCheck, Regex, Hash, GitCompareArrows, Palette, TrendingUp } from 'lucide-react'
+import { KeyRound, Megaphone, BarChart2, Sparkles, ArrowUpRight, ShieldCheck, Regex, Hash, GitCompareArrows, Palette, TrendingUp, Link2 } from 'lucide-react'
 
 const tools = [
   {
@@ -102,6 +102,16 @@ const tools = [
     glow: 'shadow-emerald-500/20',
     tag: 'Marketing',
   },
+  {
+    href: '/utm-builder',
+    icon: Link2,
+    title: 'UTM Builder',
+    description:
+      'Build UTM-tagged campaign URLs with source presets, a live preview, and one-click copy.',
+    gradient: 'from-teal-500 to-green-500',
+    glow: 'shadow-teal-500/20',
+    tag: 'Marketing',
+  },
 ]
 
 export default function HomePage() {
@@ -120,7 +130,7 @@ export default function HomePage() {
         </div>
         <div className="flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1.5 shadow-sm">
           <span className="h-1.5 w-1.5 rounded-full bg-primary" />
-          <span className="text-xs font-medium text-muted-foreground">10 tools available</span>
+          <span className="text-xs font-medium text-muted-foreground">11 tools available</span>
         </div>
       </div>
 
