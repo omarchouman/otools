@@ -8,11 +8,11 @@ import { cn } from '@/lib/utils'
 
 // ── Flag definitions ─────────────────────────────────────────────────────────
 const FLAGS = [
-  { key: 'g' as const, label: 'g', title: 'Global — find all matches' },
-  { key: 'i' as const, label: 'i', title: 'Case insensitive' },
-  { key: 'm' as const, label: 'm', title: 'Multiline — ^ and $ match line boundaries' },
-  { key: 's' as const, label: 's', title: 'Dot all — . matches newlines too' },
-  { key: 'u' as const, label: 'u', title: 'Unicode mode' },
+  { key: 'g' as const, label: 'g', desc: 'global',     title: 'Global — find all matches' },
+  { key: 'i' as const, label: 'i', desc: 'no case',    title: 'Case insensitive' },
+  { key: 'm' as const, label: 'm', desc: 'multiline',  title: 'Multiline — ^ and $ match line boundaries' },
+  { key: 's' as const, label: 's', desc: 'dot all',    title: 'Dot all — . matches newlines too' },
+  { key: 'u' as const, label: 'u', desc: 'unicode',    title: 'Unicode mode' },
 ]
 
 type FlagKey = 'g' | 'i' | 'm' | 's' | 'u'
@@ -176,19 +176,20 @@ export default function RegexTesterPage() {
 
           {/* Flag toggles */}
           <div className="flex items-center gap-0.5 border-l border-border px-2">
-            {FLAGS.map(({ key, label, title }) => (
+            {FLAGS.map(({ key, label, desc, title }) => (
               <button
                 key={key}
                 onClick={() => toggleFlag(key)}
                 title={title}
                 className={cn(
-                  'flex h-7 w-7 items-center justify-center rounded font-mono text-xs font-bold transition-colors',
+                  'flex flex-col items-center justify-center rounded px-2 py-1 transition-colors',
                   flags.has(key)
                     ? 'bg-primary/10 text-primary'
                     : 'text-muted-foreground/45 hover:bg-muted hover:text-foreground'
                 )}
               >
-                {label}
+                <span className="font-mono text-xs font-bold leading-none">{label}</span>
+                <span className="mt-0.5 text-[8px] leading-none opacity-70">{desc}</span>
               </button>
             ))}
           </div>
