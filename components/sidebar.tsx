@@ -76,6 +76,7 @@ const navCategories: NavCategory[] = [
     icon: TrendingUp,
     items: [
       { href: '/marketing', label: 'Marketing', icon: Megaphone },
+      { href: '/headline-analyzer', label: 'Headline Analyzer', icon: TrendingUp },
     ],
   },
   {

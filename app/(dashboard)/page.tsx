@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { KeyRound, Megaphone, BarChart2, Sparkles, ArrowUpRight, ShieldCheck, Regex, Hash, GitCompareArrows, Palette } from 'lucide-react'
+import { KeyRound, Megaphone, BarChart2, Sparkles, ArrowUpRight, ShieldCheck, Regex, Hash, GitCompareArrows, Palette, TrendingUp } from 'lucide-react'
 
 const tools = [
   {
@@ -92,6 +92,16 @@ const tools = [
     glow: 'shadow-green-500/20',
     tag: 'Design',
   },
+  {
+    href: '/headline-analyzer',
+    icon: TrendingUp,
+    title: 'Headline Analyzer',
+    description:
+      'Score your headline on power words, sentiment, length, and type — with actionable tips to improve it.',
+    gradient: 'from-emerald-500 to-teal-500',
+    glow: 'shadow-emerald-500/20',
+    tag: 'Marketing',
+  },
 ]
 
 export default function HomePage() {
@@ -110,7 +120,7 @@ export default function HomePage() {
         </div>
         <div className="flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1.5 shadow-sm">
           <span className="h-1.5 w-1.5 rounded-full bg-primary" />
-          <span className="text-xs font-medium text-muted-foreground">9 tools available</span>
+          <span className="text-xs font-medium text-muted-foreground">10 tools available</span>
         </div>
       </div>
 
